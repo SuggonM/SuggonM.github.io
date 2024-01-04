@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&family=Nanum+Gothic:wght@700&display=swap');
+@font-face {
+	/* font-family: Migu; */
+	/* src: url(/assets/migu-1p-bold.ttf); */
+	/* src: url(/assets/NanumGothicBold.otf); */
+	/* src: url(/assets/NotoSans-SemiBold.ttf); */
+	/* src: url(/assets/HanWangHei-Heavy.ttf); */
+ }
+ @font-face {
+	font-family: Gyeonggi;
+	src: url(/assets/GyeonggiTitleV.woff2);
+ }
+
+body { background-color: #222; color: #e6e6e6}
+
+.itembox {
+	display: inline-grid;
+	width: 64px;
+	height: 64px;
+	font-family: 'Noto Sans';
+	font-size: 12px;
+	color: #fff;
+	border-radius: 5px;
+	margin: 2px;
+	/* resize: both;
+	overflow: hidden; */
+	position: relative;
+	vertical-align: middle;
+	line-height: initial; /* initialize site's line-height: 1.75 */
+	box-sizing: initial; /* initialize site's box-sizing: border-box */
+}
+
+.itembox > * { /* all children of itembox */
+	grid-area: 1/1; /* forced into single cell to enable overlapping */
+}
+
+.itembox > :not(.item) { /* all children except the item */
+	z-index: 1; /* overlay on the item */
+	position: relative; /* position them correctly */
+	user-select: none; /* anti-selection */
+	pointer-events: none; /* no-clip */
+}
+
+.itembox > :not(.item) img { /* all images except the item */
+	height: 18px;
+	width: auto;
+}
+
+.itembox .level {
+	place-self: start; /* placed top-left */
+	top: -3px; /* pull upward */
+}
+
+.itembox .level-text {
+	color: #ddb080;
+	font-size: 10px;
+	font-weight: 600;
+}
+
+.itembox .banner {
+	align-self: start; /* placed top */
+	justify-self: end; /* placed right */
+	top: -4px; /* pull upward */
+	right: -4px; /* pull rightward */
+}
+
+.itembox .banner img + img { /* consecutive banners */
+	margin-left: -1px; /* less gap between them */
+}
+
+.itembox .item {
+	position: relative;
+	overflow: hidden;
+	border-radius: 3px; /* inner border-radius */
+}
+
+.itembox .item a, .itembox .item img {
+	position: absolute;
+	inset: 0; /* span entire box */
+	margin: auto; /* center the item */
+}
+
+.itembox .item img {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain; /* prevent image distortion */
+	image-rendering: pixelated;
+}
+
+.itembox .grade, .itembox .amount {
+	align-self: end; /* placed bottom */
+	justify-self: center; /* placed center */
+	bottom: -5px; /* pull downward */
+}
+
+.itembox .exclusive-banner { /* icon for exclusive artifact */
+	place-self: end; /* placed bottom-right */
+	bottom: -5px; /* pull downward */
+	right: -4px; /* pull rightward */
+}
+
+.itembox .exclusive-banner img {
+	height: 22px;
+}
+
+.itembox .level, .itembox .amount {
+	overflow: hidden; /* disallow spam */
+	max-width: 100%; /* ^ */
+	text-overflow: ellipsis; /* ^ */
+	padding-inline: 1px;
+	filter: var(--outline); /* text-outline */
+}
+
+.itembox .level-number, .itembox .amount {
+	font-family: 'Gyeonggi'; /* font for numeric characters */
+}
+
+.itembox-container { /* wrapper for itembox and its caption */
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2px; /* gap between itembox and caption */
+	margin: 2px;
+	vertical-align: top;
+}
+
+.itembox-caption {
+	max-width: 64px;
+	overflow-wrap: break-word;
+	text-align: center;
+	line-height: 1;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.itembox-container .itembox {
+	margin: initial; /* apply margin to outermost layer only */
+}
+
+/* Itembox Themes */
+.itembox {
+	background-image: var(--background-color-general),
+		linear-gradient(var(--border-color-general), var(--border-color-general));
+	background-clip: content-box, padding-box; /* creates gradient border */
+	padding: 2px; /* width of gradient border */
+}
+
+.itembox.normal, .itembox.low {
+	background-image: var(--background-color-normal),
+		linear-gradient(var(--border-color-normal), var(--border-color-normal));
+}
+.itembox.rare {
+	background-image: var(--background-color-rare),
+		linear-gradient(var(--border-color-rare), var(--border-color-rare));
+}
+.itembox.unique, .itembox.mid {
+	background-image: var(--background-color-unique),
+		linear-gradient(var(--border-color-unique), var(--border-color-unique));
+}
+.itembox.legend {
+	background-image: var(--background-color-legend),
+		linear-gradient(var(--border-color-legend), var(--border-color-legend));
+}
+.itembox.epic, .itembox.high {
+	background-image: var(--background-color-epic),
+		linear-gradient(var(--border-color-epic), var(--border-color-epic));
+}
+.itembox.curse {
+	background-image: var(--background-color-curse),
+		linear-gradient(var(--border-color-curse), var(--border-color-curse));
+}
+.itembox.costume {
+	background-image: var(--background-color-costume),
+		linear-gradient(var(--border-color-costume), var(--border-color-costume));
+}
+.itembox.special {
+	background-image: var(--background-color-special),
+		var(--border-color-special);
+}
+.itembox.exclusive {
+	background-image: var(--background-color-exclusive),
+		var(--border-color-exclusive);
+}
+.itembox.sc {
+	background-image: var(--background-color-sc),
+		var(--border-color-sc);
+}
+
+.itembox:not(.flicker):hover {
+	background-image: linear-gradient(var(--background-color-hover), var(--background-color-hover)),
+		linear-gradient(var(--border-color-hover), var(--border-color-hover));
+}
+
+/* ---- Utility Classes ---- */
+.itembox.dark {
+	filter: brightness(0.5);
+}
+
+.itembox.no-bg, .itembox.no-bg:before, .itembox.no-bg:after {
+	background: none !important;
+}
+
+.itembox.unpixelated .item img {
+	image-rendering: auto;
+}
+
+.itembox.image-unadjusted .item img {
+	object-fit: none;
+}
+
+.itembox.image-bottom .item img {
+	object-position: bottom;
+}
+
+.itembox.mini, .itembox-container:has(.itembox.mini) .itembox-caption {
+	zoom: 0.75;
+}
+
+.itembox.upscaled .item img { scale: 1.25; }
+.itembox.downscaled .item img { scale: 0.75; }
+
+.itembox-container.align-middle {
+	vertical-align: middle;
+}
+
+:root {
+	--outline: 
+	drop-shadow(   0px -0.5px 0.2px #000)
+	drop-shadow(   1px    0px 0.2px #000)
+	drop-shadow(   0px    1px 0.2px #000)
+	drop-shadow(-0.5px    0px 0.2px #000);
+}
+
+/* ---- Replace unavailable image ---- */
+.itembox .item .new {
+	font-size: 0;
+	user-select: none;
+}
+.itembox .item .new:before {
+	content: '?';
+	position: absolute;
+	inset: 15% 30%;
+	font-size: 50px;
+	line-height: 1;
+	color: #fff;
+	font-family: 'Gyeonggi';
+	filter: var(--outline);
+}
+
+/* ---- Mobile-specific fixes ---- */
+.skin-fandommobile .itembox .banner a + a {
+	margin-left: -4px;
+}
+
+.skin-fandommobile .itembox .item img {
+	width: auto;
+	border: none;
+	border-radius: 0;
+}
+
+/* ---- Itembox Tooltips ---- */
+
+.custom-tooltip .wds-dropdown__toggle .itembox .item a {
+	pointer-events: none; /* deactivate anchored image link */
+}
+
+.custom-tooltip .wds-dropdown__toggle .itembox {
+	cursor: pointer;
+	transition: scale 0.1s;
+}
+
+.custom-tooltip .wds-dropdown__toggle .itembox:focus-within {
+	scale: 0.9;
+}
+
+.custom-tooltip:focus-within {
+	.wds-dropdown__content, &:before, &:after {
+		display: inline-block; /* display tooltip on focus */
+	}
+}
+
+.custom-tooltip.wds-open-to-right .wds-dropdown__content { /* fix misposition */
+	top: 30%;
+}
+}
